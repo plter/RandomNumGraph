@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>随机数图</title>
+    <script src="vue.global.prod.js"></script>
+</head>
+<body style="background-color: black;">
+<div id="app" style="display: flex;flex-direction: row;align-items: baseline;">
+    <div v-for="n in nums"
+         :style="{height:(n/ratio)+'px'}"
+         style="width: 5px;margin-right: 2px;background-color: aqua;">
+    </div>
+</div>
+<script>
+    (function () {
+        const NUM_COUNT = 100;
+        let ratio = 1;
+
+        Vue.createApp({
+            data() {
+
+                let nums = [];
+                for (let i = 0; i < NUM_COUNT; i++) {
+                    nums.push(0);
+                }
+
+                for (let i = 0; i < 50000 * ratio; i++) {
+                    let r = Math.floor(Math.random() * NUM_COUNT);
+                    nums[r]++;
+                }
+
+                return {
+                    nums,
+                    ratio
+                };
+            }
+        }).mount("#app")
+    })();
+</script>
+</body>
+</html>
